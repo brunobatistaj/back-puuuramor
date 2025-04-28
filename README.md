@@ -1,54 +1,65 @@
-# CodeIgniter 4 Framework
+Documentação para Rodar o Projeto
 
-## What is CodeIgniter?
+---------Pré-requisitos---------
+Antes de começar, certifique-se de que o computador onde o projeto será configurado possui os seguintes requisitos instalados:
+PHP (versão 7.4 ou superior)
+Composer (para gerenciar dependências do PHP) - download em https://getcomposer.org/
+Servidor Web (como Apache ou Nginx) - Wamp ou Xamp
+Banco de Dados (MySQL)
+Editor de Texto/IDE (como Visual Studio Code)
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+---------Baixar o CodeIgniter---------
+Acesse o site oficial: https://codeigniter.com/
+Clique em Download para baixar a versão mais recente do CodeIgniter
+Após o download, extraia o arquivo .zip
+Copie a pasta extraída para o diretório do WAMP C:\wamp64\www\
+Acesse o diretório: Renomeie a pasta para o nome do projeto "web.local"
 
-This repository holds the distributable version of the framework.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+---------Clonar o Projeto---------
+Copie o projeto para o computador de destino. Você pode fazer isso via Git ou manualmente:
+Via Git:
+git clone <URL_DO_REPOSITORIO>
+Copie os arquivos do projeto para o diretório C:\wamp64\www\web.local - Descompacte os arquivos dentro de "web.local" e aceite subsituir.
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+***Como o tema é feito com bootstrap, descompacte o arquivo tema.zip dentro da pasta "public"
 
-The user guide corresponding to the latest version of the framework can be found
-[here](https://codeigniter4.github.io/userguide/).
 
-## Important Change with index.php
+---------Instalar Dependências Composer---------
+Baixar o Instalador
+Acesse: https://getcomposer.org/Composer-Setup.exe.
+Instale selecionando a versão atual do php.
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+Agora, rodar o Composer dentro do projeto.
+Abrir o Prompt de Comando - Abra o cmd.
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+Navegue até o diretório do seu projeto: 
+	cd C:\wamp64\www\web.local
+Instalar as Dependências: 
+	composer install
 
-**Please** read the user guide for a better explanation of how CI4 works!
 
-## Repository Management
+---------Crie um banco de dados no MySQL---------
+Endereço: http://localhost/phpmyadmin
+	  user: root -> enter
+Clicar em:
+Base de dados -> nome da base de dados: sistema_prod -> criar 
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+Opcional:
+Configure o arquivo .env na raiz do projeto:
+Renomeie o arquivo env para .env (se ainda não estiver renomeado).
+Edite as configurações de banco de dados:
+	database.default.hostname = localhost
+	database.default.database = sistema_prod (altere caso banco tenha sido criado com nome diferente)
+	database.default.username = root
+	database.default.password = <sua_senha>
+	database.default.DBDriver = MySQLi
 
-## Contributing
+---------Executar---------
+Execute as migrações dentro do terminal do vs code (essencial):
+	php spark migrate
 
-We welcome contributions from the community.
+Execute o servidor(essencial):
+	php spark serve
 
-Please read the [*Contributing to CodeIgniter*](https://github.com/codeigniter4/CodeIgniter4/blob/develop/CONTRIBUTING.md) section in the development repository.
-
-## Server Requirements
-
-PHP version 7.4 or higher is required, with the following extensions installed:
-
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-
-Additionally, make sure that the following extensions are enabled in your PHP:
-
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+Acesse: http://localhost:8080
